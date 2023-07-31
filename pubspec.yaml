@@ -16,6 +16,9 @@ dependencies:
   http: ^1.1.0
   get: ^4.6.5
   get_storage: ^2.1.1
+  google_fonts: ^5.1.0
+  supabase_flutter: ^1.10.9
+  url_launcher: ^6.1.12
 
 dev_dependencies:
   flutter_test:

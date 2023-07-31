@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import 'constants/box_name.dart';
 import 'controller/local/localController.dart';
 import 'controller/local/translate.dart';
+import 'views/lang/language_page.dart';
 
 final box = GetStorage();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
@@ -28,6 +31,10 @@ class MyApp extends StatelessWidget {
         locale: controller.language,
         theme: controller.appTheme,
         key: UniqueKey(),
-        home: const HomePage());
+        // routes: {'/':const HomePage()},
+        home: box.read(BoxName.lang).toString() != 'ar' &&
+                box.read(BoxName.lang).toString() != 'en'
+            ? const Language()
+            : HomePage());
   }
 }
