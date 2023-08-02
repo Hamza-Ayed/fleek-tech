@@ -39,12 +39,12 @@ class Header extends StatelessWidget {
                         Get.to(() => About());
                       },
                     ),
-                    MyTextButton(
-                      title: "Contact US",
-                      onPressed: () {
-                        Get.to(() => const ContaUsPage());
-                      },
-                    ),
+                    // MyTextButton(
+                    //   title: "Contact US",
+                    //   onPressed: () {
+                    //     Get.to(() => const ContaUsPage());
+                    //   },
+                    // ),
                     MyTextButton(
                       title: "Blog",
                       onPressed: () {
@@ -59,29 +59,29 @@ class Header extends StatelessWidget {
                     ),
                   ],
                 ),
-                Row(
+                const Row(
                   children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.phone,
-                        color: AppColor.googleBlue,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.email_outlined,
-                        color: AppColor.googleRed,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.book_rounded,
-                        color: AppColor.googleprimaryColor,
-                      ),
-                    ),
+                    // IconButton(
+                    //   onPressed: () {},
+                    //   icon: const Icon(
+                    //     Icons.phone,
+                    //     color: AppColor.googleBlue,
+                    //   ),
+                    // ),
+                    // IconButton(
+                    //   onPressed: () {},
+                    //   icon: const Icon(
+                    //     Icons.email_outlined,
+                    //     color: AppColor.googleRed,
+                    //   ),
+                    // ),
+                    // IconButton(
+                    //   onPressed: () {},
+                    //   icon: const Icon(
+                    //     Icons.book_rounded,
+                    //     color: AppColor.googleprimaryColor,
+                    //   ),
+                    // ),
                   ],
                 ),
               ],
@@ -112,12 +112,12 @@ class Header extends StatelessWidget {
                         Get.to(() => About());
                       },
                     ),
-                    MyTextButton(
-                      title: "Contact US",
-                      onPressed: () {
-                        Get.to(() => const ContaUsPage());
-                      },
-                    ),
+                    // MyTextButton(
+                    //   title: "Contact US",
+                    //   onPressed: () {
+                    //     Get.to(() => const ContaUsPage());
+                    //   },
+                    // ),
                     MyTextButton(
                       title: "Blog",
                       onPressed: () {
@@ -132,31 +132,31 @@ class Header extends StatelessWidget {
                     ),
                   ],
                 ),
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.phone,
-                        color: AppColor.googleBlue,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.email_outlined,
-                        color: AppColor.googleRed,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.book_rounded,
-                        color: AppColor.googleprimaryColor,
-                      ),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   children: [
+                // IconButton(
+                //   onPressed: () {},
+                //   icon: const Icon(
+                //     Icons.phone,
+                //     color: AppColor.googleBlue,
+                //   ),
+                // ),
+                // IconButton(
+                //   onPressed: () {},
+                //   icon: const Icon(
+                //     Icons.email_outlined,
+                //     color: AppColor.googleRed,
+                //   ),
+                // ),
+                // IconButton(
+                //   onPressed: () {},
+                //   icon: const Icon(
+                //     Icons.book_rounded,
+                //     color: AppColor.googleprimaryColor,
+                //   ),
+                // ),
+                //   ],
+                // ),
               ],
             ),
           ),

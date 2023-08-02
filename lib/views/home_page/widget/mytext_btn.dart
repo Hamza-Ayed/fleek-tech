@@ -20,7 +20,7 @@ class MyTextButton extends StatelessWidget {
       padding: const EdgeInsets.only(right: 20),
       child: TextButton(
         onPressed: onPressed,
-        onHover: (value) => controller.onHover(),
+        // onHover: (value) => controller.onHover(),
         style: ButtonStyle(
           minimumSize: MaterialStateProperty.all(null),
           fixedSize: MaterialStateProperty.all(null),

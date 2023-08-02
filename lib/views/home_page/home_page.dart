@@ -1,12 +1,16 @@
 import 'package:fleek_tech/constants/colors.dart';
 import 'package:fleek_tech/constants/style.dart';
+import 'package:fleek_tech/controller/ai/chatgpt.dart';
 import 'package:fleek_tech/controller/home/home_controller.dart';
+import 'package:fleek_tech/views/about/about.dart';
+import 'package:fleek_tech/views/blog/blog_page.dart';
 import 'package:fleek_tech/views/home_page/widget/circle_avatar.dart';
 import 'package:fleek_tech/views/home_page/widget/mytext_btn.dart';
 import 'package:fleek_tech/views/products/product_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../controller/local/localController.dart';
 import 'widget/contact_footer.dart';
 import 'widget/footer.dart';
 import 'widget/header.dart';
@@ -14,6 +18,7 @@ import 'widget/header.dart';
 class HomePage extends StatelessWidget {
   HomePage({super.key});
   final controller = Get.put(HomeController());
+  final localeController = Get.put(LocaleController());
 
   @override
   Widget build(BuildContext context) {
@@ -98,9 +103,9 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 60,
               ),
-              MyTextButton(
-                title: "Book Now".tr,
-              ),
+              // MyTextButton(
+              //   title: "Book Now".tr,
+              // ),
               const SizedBox(
                 height: 60,
               ),
@@ -119,26 +124,32 @@ class HomePage extends StatelessWidget {
     } else {
       return Scaffold(
         appBar: AppBar(
-          backgroundColor: AppColor.googleBlue,
+          backgroundColor: AppColor.googleGrey,
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                localeController.changeLang('ar');
+              },
               icon: const Icon(
-                Icons.phone,
+                Icons.language,
                 color: AppColor.googleBackgroundcolor,
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                localeController.changeLang('tr');
+              },
               icon: const Icon(
-                Icons.email_outlined,
+                Icons.read_more,
                 color: AppColor.googleBackgroundcolor,
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                localeController.changeLang('en');
+              },
               icon: const Icon(
-                Icons.book_rounded,
+                Icons.south_america_outlined,
                 color: AppColor.googleBackgroundcolor,
               ),
             ),
@@ -147,26 +158,41 @@ class HomePage extends StatelessWidget {
         drawer: Drawer(
           child: ListView(
             children: [
-              const DrawerHeader(
+              DrawerHeader(
+                curve: Curves.easeInCubic,
                 decoration: BoxDecoration(
-                  color: AppColor.googleBlue,
+                  color: AppColor.googleBackgroundcolor,
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColor.googleBlack,
+                      blurRadius: 1,
+                      spreadRadius: 1,
+                      blurStyle: BlurStyle.inner,
+                      offset: Offset.fromDirection(1, 4),
+                    ),
+                  ],
                 ),
-                child: Text('Fleek Tech'),
+                child: Image.asset(
+                  'assets/images/fleek.jpeg',
+                  // width: 150,
+                  fit: BoxFit.contain,
+                ),
               ),
               ListTile(
-                title: const Text('About US'),
-                onTap: () {},
+                title: Text('About US'.tr),
+                onTap: () {
+                  Get.to(() => About());
+                },
               ),
               ListTile(
-                title: const Text('Contact US'),
-                onTap: () {},
+                title: Text('Blog'.tr),
+                onTap: () {
+                  Get.to(() => BlogPage());
+                },
               ),
               ListTile(
-                title: const Text('Blog'),
-                onTap: () {},
-              ),
-              ListTile(
-                title: const Text('Products'),
+                title: Text('Products'.tr),
                 onTap: () {
                   Get.to(() => ProductPage());
                 },
@@ -247,8 +273,9 @@ class HomePage extends StatelessWidget {
                 "All our services are available for you!".tr,
                 style: AppStyle.title,
               ),
-              SizedBox(
+              Container(
                 width: Get.width,
+                height: 2000,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Column(
@@ -291,12 +318,12 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 60,
               ),
-              MyTextButton(
-                title: "Book Now".tr,
-              ),
-              const SizedBox(
-                height: 60,
-              ),
+              // MyTextButton(
+              //   title: "Book Now".tr,
+              // ),
+              // const SizedBox(
+              //   height: 100,
+              // ),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
@@ -363,7 +390,7 @@ class HomePage extends StatelessWidget {
                           child: Column(
                             children: [
                               Text(
-                                "Address",
+                                "Address".tr,
                                 style: AppStyle.headtitle2,
                               ),
                               Text(
@@ -461,6 +488,13 @@ class HomePage extends StatelessWidget {
                                     border: const OutlineInputBorder(),
                                     hintText: 'Notes'.tr,
                                   ),
+                                  validator: (value) {
+                                    if (value!.isEmpty &&
+                                        !value.contains('@')) {
+                                      return 'Please enter your Note.'.tr;
+                                    }
+                                    return null;
+                                  },
                                 ),
                               ),
                               MyTextButton(

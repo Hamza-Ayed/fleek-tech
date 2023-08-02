@@ -1,6 +1,7 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../constants/links.dart';
 import '../func/crud.dart';
@@ -11,6 +12,7 @@ class ProductsController extends GetxController {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController imgLink = TextEditingController();
   TextEditingController productsLink = TextEditingController();
+  TextEditingController promot = TextEditingController();
   List data = [];
   @override
   void onInit() {
@@ -19,6 +21,9 @@ class ProductsController extends GetxController {
   }
 
   bool isloading = false;
+
+  List res = [];
+
   void clearControllers() {
     titleController.clear();
     descriptionController.clear();
@@ -49,13 +54,5 @@ class ProductsController extends GetxController {
 
   deleteProducts() async {
     await CRUD().post(link: AppLink.deleteProduct, payload: {"id": '27'});
-  }
-
-  void launchUrl1(String url) async {
-    if (await canLaunchUrl(Uri.parse(url))) {
-      launchUrl(Uri.parse(url));
-    } else {
-      print('Could not launch $url');
-    }
   }
 }

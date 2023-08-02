@@ -19,6 +19,7 @@ dependencies:
   google_fonts: ^5.1.0
   supabase_flutter: ^1.10.9
   url_launcher: ^6.1.12
+  bard_api: ^1.0.0
 
 dev_dependencies:
   flutter_test:

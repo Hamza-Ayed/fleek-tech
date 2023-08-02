@@ -16,15 +16,15 @@ class HomeController extends GetxController {
   List data = [];
   String date = DateTime.now().year.toString();
   double widtContainer = Get.width * .23;
-  double heightContainer = Get.width * .27;
+  double heightContainer = Get.width * .3;
   bool hover = false;
 
-  void onHover() {
-    hover = !hover;
-    widtContainer = hover ? Get.width * .23 : Get.width * .25;
-    heightContainer = hover ? Get.width * .27 : Get.width * .3;
-    update();
-  }
+  // void onHover() {
+  //   hover = !hover;
+  //   widtContainer = hover ? Get.width * .23 : Get.width * .25;
+  //   heightContainer = hover ? Get.width * .27 : Get.width * .3;
+  //   update();
+  // }
 
   clearText() {
     firstName.clear();

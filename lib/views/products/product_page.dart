@@ -1,8 +1,11 @@
 import 'package:fleek_tech/constants/colors.dart';
 import 'package:fleek_tech/constants/style.dart';
+import 'package:fleek_tech/controller/ai/chatgpt.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../controller/func/launch_url.dart';
 import '../../controller/products/products_controller.dart';
 
 class ProductPage extends StatelessWidget {
@@ -20,98 +23,103 @@ class ProductPage extends StatelessWidget {
             title: Text('Products'.tr),
             backgroundColor: AppColor.googleGreen,
             actions: [
-              IconButton(
-                onPressed: () {
-                  Get.defaultDialog(
-                    title: 'Add products',
-                    content: GetBuilder<ProductsController>(
-                      builder: (controller) => Form(
-                          key: controller.formKey,
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
-                                  controller: controller.titleController,
-                                  decoration: InputDecoration(
-                                    border: const OutlineInputBorder(),
-                                    hintText: 'Product name'.tr,
-                                  ),
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'Please enter a product name.'.tr;
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
-                                  controller: controller.descriptionController,
-                                  decoration: InputDecoration(
-                                    border: const OutlineInputBorder(),
-                                    hintText: 'Product description'.tr,
-                                  ),
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'Please enter a product description.'
-                                          .tr;
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
-                                  controller: controller.imgLink,
-                                  decoration: InputDecoration(
-                                    border: const OutlineInputBorder(),
-                                    hintText: 'Product image link'.tr,
-                                  ),
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'Please enter a product image link.'
-                                          .tr;
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
-                                  controller: controller.productsLink,
-                                  decoration: InputDecoration(
-                                    border: const OutlineInputBorder(),
-                                    hintText: 'Product link'.tr,
-                                  ),
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'Please enter a product link.'.tr;
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                              ElevatedButton(
-                                child: Text('Submit'.tr),
-                                onPressed: () {
-                                  if (controller.formKey.currentState!
-                                      .validate()) {
-                                    controller.addProduct();
-                                    Get.back();
-                                  }
-                                },
-                              )
-                            ],
-                          )),
+              kIsWeb
+                  ? Container()
+                  : IconButton(
+                      onPressed: () {
+                        Get.defaultDialog(
+                          title: 'Add products',
+                          content: GetBuilder<ProductsController>(
+                            builder: (controller) => Form(
+                                key: controller.formKey,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: TextFormField(
+                                        controller: controller.titleController,
+                                        decoration: InputDecoration(
+                                          border: const OutlineInputBorder(),
+                                          hintText: 'Product name'.tr,
+                                        ),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'Please enter a product name.'
+                                                .tr;
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: TextFormField(
+                                        controller:
+                                            controller.descriptionController,
+                                        decoration: InputDecoration(
+                                          border: const OutlineInputBorder(),
+                                          hintText: 'Product description'.tr,
+                                        ),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'Please enter a product description.'
+                                                .tr;
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: TextFormField(
+                                        controller: controller.imgLink,
+                                        decoration: InputDecoration(
+                                          border: const OutlineInputBorder(),
+                                          hintText: 'Product image link'.tr,
+                                        ),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'Please enter a product image link.'
+                                                .tr;
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: TextFormField(
+                                        controller: controller.productsLink,
+                                        decoration: InputDecoration(
+                                          border: const OutlineInputBorder(),
+                                          hintText: 'Product link'.tr,
+                                        ),
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'Please enter a product link.'
+                                                .tr;
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                    ElevatedButton(
+                                      child: Text('Submit'.tr),
+                                      onPressed: () {
+                                        if (controller.formKey.currentState!
+                                            .validate()) {
+                                          controller.addProduct();
+                                          Get.back();
+                                        }
+                                      },
+                                    )
+                                  ],
+                                )),
+                          ),
+                        );
+                      },
+                      icon: const Icon(Icons.add),
                     ),
-                  );
-                },
-                icon: const Icon(Icons.add),
-              ),
             ],
           ),
           body: GetBuilder<ProductsController>(
@@ -131,8 +139,9 @@ class ProductPage extends StatelessWidget {
                                   var res = controller.data[index];
                                   return Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      color: AppColor.googleBlue,
+                                    child: InkWell(
+                                      onTap: () =>
+                                          launchUrl1(res['productsLink']),
                                       child: Column(
                                         children: [
                                           Image.network(
@@ -150,101 +159,116 @@ class ProductPage extends StatelessWidget {
     } else {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Products'.tr),
-          backgroundColor: AppColor.googleGreen,
+          title: Text(
+            'Products'.tr,
+            style: AppStyle.title.copyWith(color: AppColor.googleGrey),
+          ),
+          backgroundColor: AppColor.googleprimaryColor,
+          elevation: 0,
           actions: [
-            IconButton(
-              onPressed: () {
-                Get.defaultDialog(
-                  title: 'Add products',
-                  content: GetBuilder<ProductsController>(
-                    builder: (controller) => Form(
-                        key: controller.formKey,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: controller.titleController,
-                                decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  hintText: 'Product name'.tr,
-                                ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter a product name.'.tr;
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: controller.descriptionController,
-                                decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  hintText: 'Product description'.tr,
-                                ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter a product description.'
-                                        .tr;
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: controller.imgLink,
-                                decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  hintText: 'Product image link'.tr,
-                                ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter a product image link.'
-                                        .tr;
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                controller: controller.productsLink,
-                                decoration: InputDecoration(
-                                  border: const OutlineInputBorder(),
-                                  hintText: 'Product link'.tr,
-                                ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Please enter a product link.'.tr;
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            ElevatedButton(
-                              child: Text('Submit'.tr),
-                              onPressed: () {
-                                if (controller.formKey.currentState!
-                                    .validate()) {
-                                  controller.addProduct();
-                                  Get.back();
-                                }
-                              },
-                            )
-                          ],
-                        )),
+            kIsWeb
+                ? Container()
+                : IconButton(
+                    onPressed: () {
+                      Get.defaultDialog(
+                        title: 'Add products',
+                        content: GetBuilder<ProductsController>(
+                          builder: (controller) => Form(
+                              key: controller.formKey,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextFormField(
+                                      controller: controller.titleController,
+                                      decoration: InputDecoration(
+                                        border: const OutlineInputBorder(),
+                                        hintText: 'Product name'.tr,
+                                      ),
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'Please enter a product name.'
+                                              .tr;
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextFormField(
+                                      controller:
+                                          controller.descriptionController,
+                                      decoration: InputDecoration(
+                                        border: const OutlineInputBorder(),
+                                        hintText: 'Product description'.tr,
+                                      ),
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'Please enter a product description.'
+                                              .tr;
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextFormField(
+                                      controller: controller.imgLink,
+                                      decoration: InputDecoration(
+                                        border: const OutlineInputBorder(),
+                                        hintText: 'Product image link'.tr,
+                                      ),
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'Please enter a product image link.'
+                                              .tr;
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: TextFormField(
+                                      controller: controller.productsLink,
+                                      decoration: InputDecoration(
+                                        border: const OutlineInputBorder(),
+                                        hintText: 'Product link'.tr,
+                                      ),
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'Please enter a product link.'
+                                              .tr;
+                                        }
+                                        return null;
+                                      },
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                    child: Text('Submit'.tr),
+                                    onPressed: () {
+                                      if (controller.formKey.currentState!
+                                          .validate()) {
+                                        controller.addProduct();
+                                        Get.back();
+                                      }
+                                    },
+                                  )
+                                ],
+                              )),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.add),
                   ),
-                );
-              },
-              icon: const Icon(Icons.add),
-            ),
+            GetBuilder<ProductsController>(
+              builder: (controller) => IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.chat_bubble_outline),
+              ),
+            )
           ],
         ),
         backgroundColor: AppColor.googleprimaryColor,
@@ -264,8 +288,7 @@ class ProductPage extends StatelessWidget {
                               child: Card(
                                 elevation: 3,
                                 child: InkWell(
-                                  onTap: () => controller
-                                      .launchUrl1(res['productsLink']),
+                                  onTap: () => launchUrl1(res['productsLink']),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Column(children: [
